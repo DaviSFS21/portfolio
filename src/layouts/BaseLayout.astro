@@ -1,0 +1,60 @@
+---
+import '../design-system/tokens.css';
+import '../design-system/components.css';
+import '../styles/global.css';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { Header } from '../design-system/components/Header';
+import { Footer } from '../design-system/components/Footer';
+import ThemeSwitch from '../components/ThemeSwitch.astro';
+import { LOCALES, type Locale } from '../i18n/locales';
+import { UI } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  /** Show the "language: en ›" hint next to the switch (home only, like the current site). */
+  languageHint?: boolean;
+}
+
+const { locale, title, description, languageHint = false } = Astro.props;
+const { lang, htmlLang, home } = LOCALES[locale];
+const t = UI[lang];
+
+// The same page in each language: drop the /pt-br prefix, then rebuild the URL per locale.
+const pagePath = Astro.url.pathname.replace(/^\/pt-br(?=\/|$)/, '') || '/';
+const hrefs = {
+  en: getRelativeLocaleUrl('en', pagePath),
+  pt: getRelativeLocaleUrl('pt-br', pagePath),
+};
+---
+
+<!doctype html>
+<html lang={htmlLang} data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title ?? t.title}</title>
+    <meta name="description" content={description ?? t.description} />
+    <link rel="alternate" hreflang="en" href={new URL(hrefs.en, Astro.site)} />
+    <link rel="alternate" hreflang="pt-BR" href={new URL(hrefs.pt, Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(hrefs.en, Astro.site)} />
+    <link rel="preload" href="/fonts/BebasNeue-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Quicksand-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline>
+      // Runs before the first paint, so a saved light theme never flashes dark.
+      try {
+        if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light';
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <Header lang={lang} homeHref={home} hint={languageHint} languageSwitch={{ hrefs }}>
+      <ThemeSwitch lang={lang} />
+    </Header>
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

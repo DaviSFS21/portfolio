@@ -1,0 +1,63 @@
+---
+/**
+ * Dark / light theme button for the header. The page opens dark (the brand's face);
+ * the choice is saved in localStorage and applied before paint by BaseLayout.
+ * Which icon shows comes from CSS on html[data-theme], so nothing flickers while the script loads.
+ */
+import { Icon } from '../design-system/components/Icon';
+import type { Lang } from '../design-system/components/i18n';
+import { UI } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false" aria-label={UI[lang].lightTheme}>
+  <Icon name="sun-o" className="theme-toggle-sun" />
+  <Icon name="moon-o" className="theme-toggle-moon" />
+</button>
+
+<style is:global>
+  /* Same height (40px), gray and radius as the language switch. */
+  .theme-toggle {
+    box-sizing: border-box; width: 40px; height: 40px; display: inline-grid; place-items: center; padding: 0; border: 0;
+    cursor: pointer; font-size: 20px; background: var(--button); color: var(--on-button); border-radius: var(--radius-highlight);
+    transition: background-color var(--duration-card-hover) var(--ease-hover);
+  }
+  .theme-toggle > * { grid-area: 1 / 1; }
+  .theme-toggle:hover { background: var(--accent); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  /* The icon shows where the button takes you: sun on dark, moon on light. */
+  :root[data-theme="light"] .theme-toggle-sun,
+  :root:not([data-theme="light"]) .theme-toggle-moon { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle { transition: none; }
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const isLight = () => root.dataset.theme === 'light';
+
+  // aria-pressed tells screen readers the state ("Light theme, pressed"); the look already comes from CSS.
+  function sync() {
+    document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(isLight())));
+  }
+
+  document.querySelectorAll('[data-theme-toggle]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const theme = isLight() ? 'dark' : 'light';
+      root.dataset.theme = theme;
+      try {
+        localStorage.setItem('theme', theme);
+      } catch {
+        // Private mode or blocked storage: the switch still works for this visit.
+      }
+      sync();
+    }),
+  );
+  sync();
+</script>

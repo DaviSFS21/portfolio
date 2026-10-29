@@ -1,0 +1,13 @@
+/* Site-level rules. Component styles come from the design system (src/design-system/components.css). */
+
+/* Native controls and scrollbars follow the active theme. */
+html { color-scheme: dark; scroll-behavior: smooth; }
+html[data-theme="light"] { color-scheme: light; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* Footer stays at the bottom on short pages. */
+body { min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; }
