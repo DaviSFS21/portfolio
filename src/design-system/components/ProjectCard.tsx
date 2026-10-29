@@ -27,6 +27,7 @@ export function ProjectCard({ variant = 'half', title, description, image, href,
   return (
     <a
       className={`ds-card ds-card--${variant}` + (className ? ' ' + className : '')}
+      data-reveal="up"
       href={href}
       target={newTab ? '_blank' : undefined}
       rel={newTab ? 'noopener' : undefined}

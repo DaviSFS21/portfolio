@@ -5,6 +5,7 @@ export const COPY = {
   pt: {
     languageHint: 'idioma: pt-br',
     languageGroup: 'Idioma',
+    lightTheme: 'Tema claro',
     aboutMe: 'Sobre mim',
     projects: 'Projetos',
     resume: 'Veja o meu currículo',
@@ -22,6 +23,7 @@ export const COPY = {
   en: {
     languageHint: 'language: en',
     languageGroup: 'Language',
+    lightTheme: 'Light theme',
     aboutMe: 'About me',
     projects: 'Projects',
     resume: 'Take a look at my curriculum',

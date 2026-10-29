@@ -14,16 +14,16 @@ export interface HeroProps {
   scrollTarget?: string;
   /** Scroll indicator label. Default: "Sobre mim" / "About me". */
   scrollLabel?: string;
-  /** Section height. Default: "100vh", like the site. */
+  /** Section height. Default (CSS): the screen minus the header, so header + hero fill the first screen. */
   height?: string;
   className?: string;
 }
 
 /** Top of the site: gradient-hero at full height, the animated white signature, the role and a scroll indicator. */
-export function Hero({ role = 'software engineer', name = 'Davi Soares', lang = 'pt', scrollTarget = '#sobre', scrollLabel, height = '100vh', className }: HeroProps) {
+export function Hero({ role = 'software engineer', name = 'Davi Soares', lang = 'pt', scrollTarget = '#sobre', scrollLabel, height, className }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
   return (
-    <section ref={sectionRef} className={'ds-hero' + (className ? ' ' + className : '')} style={{ minHeight: height }}>
+    <section ref={sectionRef} className={'ds-hero' + (className ? ' ' + className : '')} style={height ? { minHeight: height } : undefined}>
       <h1 className="ds-sr-only">{name}</h1>
       <AnimatedLogo
         className="ds-hero-logo"

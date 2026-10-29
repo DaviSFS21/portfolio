@@ -1,8 +1,7 @@
 /* Site-level rules. Component styles come from the design system (src/design-system/components.css). */
 
-/* Native controls and scrollbars follow the active theme. */
+/* The site is dark only: native controls and scrollbars follow. */
 html { color-scheme: dark; scroll-behavior: smooth; }
-html[data-theme="light"] { color-scheme: light; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

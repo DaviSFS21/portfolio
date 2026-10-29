@@ -16,15 +16,15 @@ export interface ProjectHeroProps {
   scrollTarget?: string;
   /** Default: "Projeto" / "Project". */
   scrollLabel?: string;
-  /** Default: "100vh", like the site's project pages. */
+  /** Section height. Default (CSS): the screen minus the header, so header + hero fill the first screen. */
   height?: string;
   className?: string;
 }
 
 /** Top of a case study: gradient-hero at full height with the project's mark and a subtitle, like the site's /idv pages. */
-export function ProjectHero({ title, media, mediaWidth, subtitle, lang = 'pt', scrollTarget = '#conteudo', scrollLabel, height = '100vh', className }: ProjectHeroProps) {
+export function ProjectHero({ title, media, mediaWidth, subtitle, lang = 'pt', scrollTarget = '#conteudo', scrollLabel, height, className }: ProjectHeroProps) {
   return (
-    <section className={'ds-hero ds-project-hero' + (className ? ' ' + className : '')} style={{ minHeight: height }}>
+    <section className={'ds-hero ds-project-hero' + (className ? ' ' + className : '')} style={height ? { minHeight: height } : undefined}>
       {media ? (
         <>
           <h1 className="ds-sr-only">{title}</h1>

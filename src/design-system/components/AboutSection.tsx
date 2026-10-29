@@ -29,7 +29,7 @@ export function AboutSection({ title, text, photo, technologies = [], technologi
       <div className="ds-about-inner">
         {photo && <img className="ds-about-photo" src={photo.src} alt={photo.alt} />}
         <div className="ds-about-text">
-          <h2 className="ds-block-title">{title as any}</h2>
+          <h2 className="ds-block-title" data-reveal="right">{title as any}</h2>
           {paragraphs.map((p, i) => <p key={i} className="ds-about-paragraph">{p}</p>)}
           {technologiesIntro && <p className="ds-about-paragraph">{technologiesIntro}</p>}
           {technologies.length > 0 && (

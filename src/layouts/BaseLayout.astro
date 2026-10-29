@@ -5,7 +5,7 @@ import '../styles/global.css';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { Header } from '../design-system/components/Header';
 import { Footer } from '../design-system/components/Footer';
-import ThemeSwitch from '../components/ThemeSwitch.astro';
+import { BackToTop } from '../design-system/components/BackToTop';
 import { LOCALES, type Locale } from '../i18n/locales';
 import { UI } from '../i18n/ui';
 
@@ -42,19 +42,24 @@ const hrefs = {
     <link rel="preload" href="/fonts/BebasNeue-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Quicksand-Variable.woff2" as="font" type="font/woff2" crossorigin />
     <script is:inline>
-      // Runs before the first paint, so a saved light theme never flashes dark.
-      try {
-        if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light';
-      } catch (e) {}
+      // Runs before the first paint, so blocks that fade in on scroll start hidden
+      // (initReveal, at the end of the body, shows them). Without JavaScript nothing is hidden.
+      (function () {
+        var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!still && 'IntersectionObserver' in window) document.documentElement.classList.add('ds-reveal-ready');
+      })();
     </script>
   </head>
   <body>
-    <Header lang={lang} homeHref={home} hint={languageHint} languageSwitch={{ hrefs }}>
-      <ThemeSwitch lang={lang} />
-    </Header>
+    <Header lang={lang} homeHref={home} hint={languageHint} languageSwitch={{ hrefs }} />
     <main>
       <slot />
     </main>
     <Footer lang={lang} />
+    <BackToTop client:idle lang={lang} />
+    <script>
+      import { initReveal } from '../design-system/components/reveal';
+      initReveal();
+    </script>
   </body>
 </html>

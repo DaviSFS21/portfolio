@@ -18,7 +18,7 @@ export function ProjectsSection({ title, lang = 'pt', id = 'projetos', children,
   return (
     <section id={id} className={'ds-projects' + (className ? ' ' + className : '')}>
       <div className="ds-container">
-        <h2 className="ds-section-title">{title || COPY[lang].projects}</h2>
+        <h2 className="ds-section-title" data-reveal="in">{title || COPY[lang].projects}</h2>
         <div className="ds-projects-grid">{children as any}</div>
       </div>
     </section>

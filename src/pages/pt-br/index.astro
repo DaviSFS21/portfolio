@@ -1,11 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Home from '../../components/home/Home.astro';
 ---
 
 <BaseLayout locale="pt-br" languageHint>
-  <p class="stage-note">Home · etapa 2</p>
+  <Home locale="pt-br" />
 </BaseLayout>
-
-<style>
-  .stage-note { margin: 0; padding: var(--space-100) 0; text-align: center; font-family: var(--font-display); font-size: 50px; color: var(--ink-muted); }
-</style>

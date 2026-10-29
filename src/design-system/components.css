@@ -54,8 +54,9 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
 @keyframes ds-disappear { to { opacity: 0; visibility: hidden; } }
 
 /* Hero */
-.ds-hero { position: relative; overflow: hidden; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-30); padding: var(--space-60) 16px 110px; background: var(--gradient-hero); color: var(--color-white); }
-.ds-hero-logo { width: min(760px, 80vw, calc((100vh - 300px) * 2.05)); min-width: 200px; cursor: pointer; }
+/* Header + hero fill the first screen exactly: the hero takes the viewport minus the header. svh keeps it right under mobile browser bars. */
+.ds-hero { min-height: calc(100vh - var(--header-height)); min-height: calc(100svh - var(--header-height)); position: relative; overflow: hidden; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-30); padding: var(--space-60) 16px 110px; background: var(--gradient-hero); color: var(--color-white); }
+.ds-hero-logo { width: min(clamp(240px, 40vw, 560px), calc((100svh - var(--header-height) - 300px) * 2.1)); min-width: 200px; cursor: pointer; }
 .ds-hero-role { margin: 0; font-family: var(--font-body); font-size: 32px; font-weight: 300; line-height: 1.2; color: var(--color-white); text-align: center; opacity: 0; animation: ds-fade-in var(--duration-subtitle) ease-in 2.5s forwards; }
 @keyframes ds-fade-in { to { opacity: 1; } }
 .ds-scroll { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--color-white); text-decoration: none; }
@@ -122,7 +123,46 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
 .ds-back-to-top:hover { background: var(--accent); }
 .ds-back-to-top:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
+/* ThemeSwitch: same height (40px), gray and radius as the language switch */
+.ds-theme-toggle {
+  box-sizing: border-box; width: 40px; height: 40px; display: inline-grid; place-items: center; padding: 0; border: 0;
+  cursor: pointer; font-size: 20px; background: var(--button); color: var(--on-button); border-radius: var(--radius-highlight);
+  transition: background-color var(--duration-card-hover) var(--ease-hover);
+}
+.ds-theme-toggle > * { grid-area: 1 / 1; }
+.ds-theme-toggle:hover { background: var(--accent); }
+.ds-theme-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+/* The icon shows where the button takes you: sun on dark, moon on light. */
+:root[data-theme="light"] .ds-theme-toggle-sun,
+:root:not([data-theme="light"]) .ds-theme-toggle-moon { display: none; }
+
+/* Theme sweep (theme.ts): the new theme covers the page at 45 degrees, bottom-left to top-right,
+   like the color filling the logo. The old page stays still underneath. */
+.ds-theme-sweeping::view-transition-old(root),
+.ds-theme-sweeping::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+.ds-theme-sweeping::view-transition-new(root) { animation: ds-theme-sweep var(--duration-fill) var(--ease-draw) both; }
+@keyframes ds-theme-sweep {
+  from { clip-path: polygon(0 100%, 0 100%, 0 100%); }
+  to { clip-path: polygon(0 100%, calc(100vw + 100vh) 100%, 0 calc(100% - 100vw - 100vh)); }
+}
+
+/* Scroll reveal (reveal.ts): hidden only while html has ds-reveal-ready, so without JavaScript everything shows. */
+.ds-reveal-ready [data-reveal] {
+  opacity: 0;
+  transition: opacity var(--duration-reveal) var(--ease-reveal) var(--reveal-delay, 150ms),
+    transform var(--duration-reveal) var(--ease-reveal) var(--reveal-delay, 150ms);
+}
+.ds-reveal-ready [data-reveal="up"] { transform: translateY(100px); }
+.ds-reveal-ready [data-reveal="right"] { transform: translateX(-100px); }
+.ds-reveal-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
+/* If initReveal never runs, show the blocks after 4s anyway. */
+.ds-reveal-ready:not(.ds-reveal-on) [data-reveal] { animation: ds-reveal-fallback 0s 4s forwards; }
+@keyframes ds-reveal-fallback { to { opacity: 1; transform: none; } }
+/* Neighbors: the second half card arrives 450ms after the first. */
+.ds-card--half + .ds-card--half { --reveal-delay: 450ms; }
+
 @media (max-width: 720px) {
+  :root { --header-height: 64px; }
   .ds-header-hint { display: none; }
   .ds-header { gap: var(--space-10); }
   .ds-header-name { font-size: 26px; white-space: nowrap; }
@@ -140,7 +180,7 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
   .ds-hero-role { animation: none; opacity: 1; }
   .ds-scroll-mouse::before { animation: none; top: 50%; opacity: 1; }
   .ds-header-hint { animation: none; }
-  .ds-card, .ds-button, .ds-lang-knob, .ds-lang-option { transition: none; }
+  .ds-card, .ds-button, .ds-lang-knob, .ds-lang-option, .ds-theme-toggle { transition: none; }
   .ds-card:hover { transform: none; }
 }
 
@@ -153,7 +193,7 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
 .ds-tech svg { display: block; }
 
 /* ProjectHero */
-.ds-project-hero-media { width: min(420px, 60vw, calc(100vh - 320px)); min-width: 160px; }
+.ds-project-hero-media { width: min(420px, 60vw, calc(100svh - var(--header-height) - 320px)); min-width: 160px; }
 .ds-project-hero-media > * { display: block; width: 100%; height: auto; }
 .ds-project-hero-title { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 70px; line-height: 1.2; letter-spacing: 2px; color: var(--color-white); text-align: center; }
 .ds-project-hero-subtitle { margin: 0; font-family: var(--font-body); font-weight: 300; font-size: 32px; line-height: 1.2; color: var(--color-white); text-align: center; opacity: 0; animation: ds-fade-in var(--duration-subtitle) ease-in 0.5s forwards; }
