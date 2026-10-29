@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22.23.4"
+    "node": ">=22.22.0"
   },
   "scripts": {
     "dev": "astro dev",
@@ -13,8 +13,8 @@
     "check": "astro check"
   },
   "dependencies": {
-    "@astrojs/react": "^7.1.1",
-    "astro": "^7.4.2",
+    "@astrojs/react": "7.1.0",
+    "astro": "7.4.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
