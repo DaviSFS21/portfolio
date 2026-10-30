@@ -1,0 +1,15 @@
+---
+// Picks the template the project asks for. The quick project template arrives with New Start Pro and CT Bravus.
+import type { CollectionEntry } from 'astro:content';
+import CaseStudy from './CaseStudy.astro';
+import type { Locale } from '../../i18n/locales';
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+  locale: Locale;
+}
+
+const { entry, locale } = Astro.props;
+---
+
+{entry.data.template === 'case-study' && <CaseStudy entry={entry} locale={locale} />}
