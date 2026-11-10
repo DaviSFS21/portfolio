@@ -1,7 +1,8 @@
 ---
-// Picks the template the project asks for. The quick project template arrives with New Start Pro and CT Bravus.
+// Picks the template the project asks for.
 import type { CollectionEntry } from 'astro:content';
 import CaseStudy from './CaseStudy.astro';
+import QuickProject from './QuickProject.astro';
 import type { Locale } from '../../i18n/locales';
 
 interface Props {
@@ -12,4 +13,4 @@ interface Props {
 const { entry, locale } = Astro.props;
 ---
 
-{entry.data.template === 'case-study' && <CaseStudy entry={entry} locale={locale} />}
+{entry.data.template === 'case-study' ? <CaseStudy entry={entry} locale={locale} /> : <QuickProject entry={entry} locale={locale} />}

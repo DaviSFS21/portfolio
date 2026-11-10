@@ -83,10 +83,16 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
 .ds-card-text { margin: 0 0 8px; }
 .ds-card-media img { display: block; height: auto; }
 .ds-card--wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; column-gap: var(--space-20); }
-.ds-card--wide .ds-card-media img { margin-left: 8%; }
+.ds-card--wide .ds-card-media img { width: 80%; margin-left: 8%; }
 .ds-card--wide .ds-card-body { text-align: center; }
-.ds-card--half { min-height: 500px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-20); }
-.ds-card--half .ds-card-media { width: 100%; display: flex; justify-content: center; }
+.ds-card--half { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: var(--space-20); }
+/* Every logo fills a box of the same height: logos side by side match in size and the titles line up.
+   The card's height follows its content; the grid stretches the cards of one row to the same height.
+   A wide card showing a logo (image.logo) uses the same box, so the mark keeps its size in the "next project" banner. */
+.ds-card--half .ds-card-media, .ds-card-media--logo { width: 100%; height: clamp(96px, 11vw, 140px); display: flex; justify-content: center; align-items: center; }
+.ds-card--half .ds-card-media img, .ds-card .ds-card-media.ds-card-media--logo img { height: 100%; width: auto; max-width: 100%; object-fit: contain; margin: 0; }
+/* In the wide card the mark gets more air: a bit smaller than in the half card, with room above and below. */
+.ds-card--wide .ds-card-media--logo { height: clamp(72px, 7vw, 100px); padding: var(--space-50) 0; }
 
 /* Contacts */
 .ds-contacts { background: var(--surface); color: var(--ink); padding-top: var(--space-50); }
@@ -173,7 +179,7 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
   .ds-projects-grid, .ds-contacts-grid { grid-template-columns: 1fr; }
   .ds-card--wide { grid-template-columns: 1fr; text-align: center; }
   .ds-card--wide .ds-card-media img { margin: 0 auto 20px; }
-  .ds-card--half { min-height: 0; }
+  .ds-card--wide .ds-card-media--logo { padding: var(--space-20) 0; margin-bottom: 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -193,10 +199,13 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
 .ds-tech svg { display: block; }
 
 /* ProjectHero */
-.ds-project-hero-media { width: min(420px, 60vw, calc(100svh - var(--header-height) - 320px)); min-width: 160px; }
-.ds-project-hero-media > * { display: block; width: 100%; height: auto; }
+/* The mark is sized by height, so a square mark and a wide one look the same size from project to project. */
+.ds-project-hero-media { display: flex; justify-content: center; height: min(240px, 40vw, calc(100svh - var(--header-height) - 320px)); min-height: 120px; }
+.ds-project-hero-media > * { display: block; height: 100%; width: auto; max-width: 90vw; object-fit: contain; }
+.ds-project-hero-media--width { height: auto; min-height: 0; }
+.ds-project-hero-media--width > * { width: 100%; height: auto; max-width: none; }
 .ds-project-hero-title { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 70px; line-height: 1.2; letter-spacing: 2px; color: var(--color-white); text-align: center; }
-.ds-project-hero-subtitle { margin: 0; font-family: var(--font-body); font-weight: 300; font-size: 32px; line-height: 1.2; color: var(--color-white); text-align: center; opacity: 0; animation: ds-fade-in var(--duration-subtitle) ease-in 0.5s forwards; }
+.ds-project-hero-subtitle { margin: 0; font-family: var(--font-body); font-weight: 300; font-size: calc(32px * var(--ds-subtitle-scale, 1)); line-height: 1.2; color: var(--color-white); text-align: center; opacity: 0; animation: ds-fade-in var(--duration-subtitle) ease-in 0.5s forwards; }
 
 /* ProjectIntro */
 .ds-project-intro { background: var(--surface); color: var(--ink); padding: var(--space-60) 0 var(--space-30); }
@@ -226,7 +235,7 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
 .ds-article-section-body { display: flex; flex-direction: column; gap: var(--space-30); }
 
 /* Prose */
-.ds-prose { max-width: var(--prose-width); font-family: var(--font-body); font-weight: 400; font-size: 18px; line-height: 1.7; color: var(--ink); }
+.ds-prose { width: 100%; max-width: var(--prose-width); margin-inline: auto; font-family: var(--font-body); font-weight: 400; font-size: 18px; line-height: 1.7; color: var(--ink); }
 .ds-prose p, .ds-prose ul, .ds-prose ol { margin: 0 0 1em; }
 .ds-prose > :last-child { margin-bottom: 0; }
 .ds-prose h3 { margin: 1.4em 0 0.4em; font-family: var(--font-display); font-weight: 400; font-size: 32px; line-height: 1.2; }
@@ -238,7 +247,7 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
 /* Figure & Gallery */
 .ds-figure { margin: 0; }
 .ds-figure img { display: block; width: 100%; height: auto; }
-.ds-figure--text { max-width: var(--prose-width); }
+.ds-figure--text { width: 100%; max-width: var(--prose-width); margin-inline: auto; }
 .ds-figure--full { width: 100vw; margin-left: calc(50% - 50vw); }
 .ds-figure--full .ds-caption-text { box-sizing: border-box; max-width: var(--container-width); margin: var(--space-10) auto 0; padding: 0 12px; }
 .ds-figure--framed .ds-figure-media { display: flex; justify-content: center; align-items: center; padding: var(--space-30); background: var(--color-black); border: 1px solid var(--line); }
@@ -250,7 +259,7 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
 .ds-gallery .ds-figure--framed .ds-figure-media { box-sizing: border-box; min-height: 260px; }
 
 /* PullQuote */
-.ds-quote { margin: 0; max-width: var(--prose-width); padding-top: var(--space-20); border-top: var(--rule-thick) solid var(--ink); }
+.ds-quote { width: 100%; margin: 0 auto; max-width: var(--prose-width); box-sizing: border-box; padding-top: var(--space-20); border-top: var(--rule-thick) solid var(--ink); }
 .ds-quote blockquote { margin: 0; font-family: var(--font-body); font-weight: 300; font-size: 28px; line-height: 1.4; color: var(--ink); }
 .ds-quote figcaption { margin-top: var(--space-10); }
 
@@ -276,7 +285,7 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
 
 @media (max-width: 720px) {
   .ds-project-hero-title, .ds-project-intro-title { font-size: 50px; }
-  .ds-project-hero-subtitle { font-size: 25px; }
+  .ds-project-hero-subtitle { font-size: calc(25px * var(--ds-subtitle-scale, 1)); }
   .ds-article-section-title, .ds-block-title { font-size: 35px; }
   .ds-stat-value { font-size: 50px; }
   .ds-gallery--2, .ds-gallery--3 { grid-template-columns: 1fr; }

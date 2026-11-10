@@ -30,12 +30,20 @@ const projects = defineCollection({
       title: z.string(),
       /** Position in the list of projects (Home and "next project"). */
       order: z.number(),
+      /** case-study: hero + numbered chapters. quick: intro + one image + a few paragraphs. */
       template: z.enum(['case-study', 'quick']),
-      /** One or two sentences: the card text on the Home and the page's description. */
+      /** One or two sentences: the page's description for search engines and link previews. */
       summary: localized,
-      hero: z.object({ logo: z.enum(['monogram']).optional(), image: image().optional(), subtitle: localized.optional() }).optional(),
-      facts: z.array(z.object({ label: localized, value: localized.optional(), tech: z.array(tech).optional() })),
+      facts: z.array(z.object({ label: localized, value: localized.optional(), tech: z.array(tech).optional(), href: z.url().optional() })),
+      // case-study
+      hero: z.object({ logo: z.enum(['monogram']).optional(), image: image().optional(), subtitle: localized.optional(), background: z.string().optional(), subtitleFont: z.string().optional(), subtitleScale: z.number().positive().optional() }).optional(),
       chapters: z.array(z.object({ title: localized, blocks: z.array(block) })).optional(),
+      // quick
+      kicker: localized.optional(),
+      lead: localized.optional(),
+      site: z.object({ href: z.url(), label: localized }).optional(),
+      cover: picture.optional(),
+      body: localizedList.optional(),
     });
   },
 });

@@ -10,3 +10,6 @@ html { color-scheme: dark; scroll-behavior: smooth; }
 /* Footer stays at the bottom on short pages. */
 body { min-height: 100vh; display: flex; flex-direction: column; }
 main { flex: 1; }
+
+/* Beetle, the sqlutions title font, for the subtitle of its project page. Declared here, but the browser only downloads it on a page that uses it. */
+@font-face { font-family: 'Beetle'; src: url('/fonts/projects/Beetle-Regular.ttf') format('truetype'); font-display: swap; }

@@ -1,0 +1,127 @@
+# sqlutions - Branding: case study. Text in both languages side by side, images shared.
+title: sqlutions - Branding
+order: 3
+template: case-study
+summary:
+  pt: Essa marca foi criada para ser a cara dos projetos desenvolvidos pelo grupo "sqlutions" durante a Graduação em Tecnólogo de Banco de Dados na FATEC. Foi feita pensando em usufruir do trocadilho no nome do grupo.
+  en: This brand was created to be the identity of the projects developed by the "sqlutions" group during the Database Technologist Graduation at FATEC. It was made aiming to take advantage of the pun made with the group's name.
+hero:
+  image: ./logo-white.png
+  # The sqlutions gradient from the old /idv page: yellow #F2BB44 to navy #0F1314.
+  background: 'linear-gradient(225deg, #F2BB44 -20%, #0F1314 120%)'
+  # Beetle, the sqlutions title font, as on the old /idv page.
+  subtitleFont: "'Beetle', var(--font-body)"
+  # Beetle draws its lowercase about 26% smaller than Quicksand; 1.35 brings it to the usual size.
+  subtitleScale: 1.35
+  subtitle:
+    pt: brand guideline
+    en: brand guideline
+facts:
+- label:
+    pt: Papel
+    en: Role
+  value:
+    pt: Identidade visual e guia de marca
+    en: Brand identity and brand guideline
+- label:
+    pt: Cliente
+    en: Client
+  value:
+    pt: Grupo sqlutions, de projetos da FATEC
+    en: The sqlutions group, for FATEC projects
+- label:
+    pt: Ano
+    en: Year
+  value:
+    pt: '2024'
+    en: '2024'
+- label:
+    pt: Entregas
+    en: Deliverables
+  value:
+    pt: Logo em 3 variações, cores, tipografia e guia de marca
+    en: Logo in 3 variations, colors, typography and brand guideline
+chapters:
+- title:
+    pt: Conceito
+    en: Concept
+  blocks:
+  - type: prose
+    text:
+      pt:
+      - A logo, que simboliza o nascer do sol, indica renovação e oportunidade, por lembrar os novos horizontes e o início de um novo dia.
+      - De forma poética e contemporânea, a logo sugere uma nova fase aos seus clientes, uma vez que a tecnologia, quando bem aplicada, é um diferencial tremendo para empresas, corporações e negócios.
+      en:
+      - The logo, which symbolizes the sunrise, stands for renewal and opportunity, as it brings to mind new horizons and the start of a new day.
+      - In a poetic and contemporary way, the logo suggests a new phase for its clients, since technology, when well applied, is a tremendous edge for companies, corporations and businesses.
+  - type: figure
+    size: text
+    src: ./guideline-cover.png
+    alt:
+      pt: 'Capa do guia de marca: o sol nascendo em amarelo sobre duas linhas, com o nome sqlutions'
+      en: 'Brand guideline cover: the yellow rising sun over two lines, with the name sqlutions'
+    caption:
+      pt: Capa do guia de marca, versão 1.0 (abril de 2024).
+      en: Brand guideline cover, version 1.0 (April 2024).
+- title:
+    pt: Logotipos
+    en: Logos
+  blocks:
+  - type: prose
+    text:
+      pt:
+      - A logo possui 3 variações. Somente o ícone é usado em fotos de perfil e marcadores. A versão horizontal é usada em assinaturas, e a versão com ícone e escrita, em menções em sites e sistemas.
+      en:
+      - The logo has 3 variations. The icon alone is used in profile pictures and bookmarks. The horizontal version is used in signatures, and the version with icon and wordmark in mentions on websites and systems.
+  - type: figure
+    src: ./logos.png
+    alt:
+      pt: Página do guia com as três variações da logo
+      en: Guideline page with the three logo variations
+    caption:
+      pt: Logotipos (guia de marca, página 02).
+      en: Logos (brand guideline, page 02).
+- title:
+    pt: Uso
+    en: Usage
+  blocks:
+  - type: prose
+    text:
+      pt:
+      - Em fundos coloridos, a logo branca ou preta. Em fundos pretos, a branca ou a colorida. Em fundos brancos, a logo preta.
+      en:
+      - On colored backgrounds, the white or black logo. On black backgrounds, the white or the color one. On white backgrounds, the black logo.
+  - type: figure
+    src: ./logo-usage.png
+    alt:
+      pt: Página do guia com a logo sobre fundo amarelo, preto e branco
+      en: Guideline page with the logo on yellow, black and white backgrounds
+    caption:
+      pt: Uso das logotipos (guia de marca, página 03).
+      en: Logo usage (brand guideline, page 03).
+- title:
+    pt: Tipografia e cores
+    en: Typography and colors
+  blocks:
+  - type: prose
+    text:
+      pt:
+      - 'A Beetle aparece nos títulos e a Dosis, nos subtítulos e textos. As cores são o amarelo #F2BB44, o branco #F0EBE8, o azul-marinho #0F1314 e o preto #1A1A1A.'
+      en:
+      - 'Beetle is used for titles and Dosis for subtitles and body text. The colors are yellow #F2BB44, white #F0EBE8, navy blue #0F1314 and black #1A1A1A.'
+  - type: gallery
+    items:
+    - src: ./typography.png
+      alt:
+        pt: Página do guia com as fontes Beetle e Dosis
+        en: Guideline page with the Beetle and Dosis typefaces
+      caption:
+        pt: Tipografia (página 04).
+        en: Typography (page 04).
+    - src: ./colors.png
+      alt:
+        pt: Página do guia com as quatro cores da marca
+        en: Guideline page with the four brand colors
+      caption:
+        pt: Cores (página 05).
+        en: Colors (page 05).

@@ -3,8 +3,10 @@ import React from './react';
 export interface ProjectCardImage {
   src: string;
   alt: string;
-  /** Image width inside the card. Default: "80%". */
+  /** Image width inside the card. Default: "80%" on wide cards; half cards size the logo by height so logos side by side match. */
   width?: string;
+  /** A brand mark, not a screenshot: sized by height like in the half card, also in the wide card. Half cards always do this. */
+  logo?: boolean;
 }
 
 export interface ProjectCardProps {
@@ -33,8 +35,8 @@ export function ProjectCard({ variant = 'half', title, description, image, href,
       rel={newTab ? 'noopener' : undefined}
     >
       {image && (
-        <div className="ds-card-media">
-          <img src={image.src} alt={image.alt} style={{ width: image.width || '80%' }} loading="lazy" />
+        <div className={'ds-card-media' + (image.logo ? ' ds-card-media--logo' : '')}>
+          <img src={image.src} alt={image.alt} style={image.width ? { width: image.width } : undefined} loading="lazy" />
         </div>
       )}
       <div className="ds-card-body">

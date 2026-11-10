@@ -3,14 +3,13 @@
 import type { CollectionEntry } from 'astro:content';
 import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
-import { FactSheet } from '../../design-system/components/FactSheet';
 import { ArticleSection, Prose, Figure, Gallery, PullQuote, Stats } from '../../design-system/components/Article';
 import { NextProject } from '../../design-system/components/NextProject';
 import { CaseHero } from './CaseHero';
+import { ProjectFacts } from './ProjectFacts';
+import { nextProjectCard } from './next';
 import { LogoReplay } from './LogoReplay';
 import { LOCALES, type Locale } from '../../i18n/locales';
-import { projectHref } from '../../i18n/routes';
-import { PROJECTS } from '../../data/home';
 
 interface Props {
   entry: CollectionEntry<'projects'>;
@@ -46,22 +45,12 @@ const chapters = await Promise.all(
 
 const heroImage = data.hero?.image ? await src(data.hero.image, 840) : undefined;
 
-// Next project: the one after this in the Home's order, back to the first after the last.
-const index = PROJECTS.findIndex((p) => p.slug === entry.id);
-const next = PROJECTS[(index + 1) % PROJECTS.length];
-// Always the wide card here: image beside the text keeps the ending compact.
-const nextCard = {
-  variant: 'wide' as const,
-  title: next.title,
-  description: next.description[lang],
-  href: projectHref(locale, next.slug),
-  image: { src: await src(next.image, next.variant === 'wide' ? 1040 : 720), alt: next.alt[lang], width: next.imageWidth },
-};
+const nextCard = await nextProjectCard(entry.id, locale);
 ---
 
-<CaseHero lang={lang} title={data.title} subtitle={data.hero?.subtitle?.[lang]} logo={data.hero?.logo} imageSrc={heroImage} />
+<CaseHero lang={lang} title={data.title} subtitle={data.hero?.subtitle?.[lang]} logo={data.hero?.logo} imageSrc={heroImage} background={data.hero?.background} subtitleFont={data.hero?.subtitleFont} subtitleScale={data.hero?.subtitleScale} />
 <div id="conteudo">
-  <FactSheet lang={lang} facts={data.facts.map((f) => ({ label: f.label[lang], value: f.value?.[lang], tech: f.tech }))} />
+  <ProjectFacts lang={lang} facts={data.facts.map((f) => ({ label: f.label[lang], value: f.value?.[lang], tech: f.tech, href: f.href }))} />
   {
     chapters.map((chapter) => (
       <ArticleSection number={chapter.number} title={chapter.title}>
