@@ -17,7 +17,8 @@ const { locale } = Astro.props;
 const { lang } = LOCALES[locale];
 
 // Images go out as WebP at about twice their shown size (sharp screens), never the original files.
-const photoSrc = (await getImage({ src: photo, width: 640, format: 'webp' })).src;
+// Retina: 2x the 420px display width, capped at the source so it never upscales.
+const photoSrc = (await getImage({ src: photo, width: Math.min(840, photo.width), format: 'webp' })).src;
 const cards = await Promise.all(
   PROJECTS.map(async (p) => ({
     key: p.slug,

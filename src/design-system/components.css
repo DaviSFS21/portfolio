@@ -277,7 +277,7 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
 /* AboutSection */
 .ds-about { background: var(--surface); color: var(--ink); padding: var(--space-100) 0; }
 .ds-about-inner { width: var(--content-width); max-width: 90%; margin: 0 auto; display: flex; align-items: center; justify-content: space-around; gap: var(--space-20); }
-.ds-about-photo { display: block; width: 420px; max-width: 100%; height: auto; }
+.ds-about-photo { display: block; width: 420px; max-width: 100%; height: auto; border-radius: var(--radius-card); background: var(--gradient-hero); }
 .ds-about-text { width: var(--text-width); max-width: 100%; }
 .ds-about-paragraph { margin: 0 0 1rem; font-family: var(--font-body); font-weight: 300; font-size: 18px; line-height: 22px; }
 .ds-about-tech { display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 45px; color: var(--ink); }
