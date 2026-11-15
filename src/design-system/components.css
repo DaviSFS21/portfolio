@@ -47,7 +47,8 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
 
 /* Header */
 .ds-header { box-sizing: border-box; height: var(--header-height); padding: 0 var(--header-padding-x); display: flex; align-items: center; justify-content: space-between; gap: var(--space-20); background: var(--surface); color: var(--ink); }
-.ds-header-name { font-family: var(--font-display); font-size: 32px; line-height: 1.2; color: var(--ink); text-decoration: none; padding-top: 4px; }
+.ds-header-brand { display: flex; align-items: baseline; gap: 0.3em; font-family: var(--font-display); font-size: 32px; line-height: 1.2; padding-top: 4px; white-space: nowrap; }
+.ds-header-name { font: inherit; color: var(--ink); text-decoration: none; }
 .ds-header-name:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
 .ds-header-actions { display: flex; align-items: center; gap: var(--space-20); }
 .ds-header-hint { font-family: var(--font-body); font-size: 16px; color: var(--ink); animation: ds-disappear 1s forwards 4.5s; }
@@ -117,6 +118,9 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
 .ds-footer-inner { padding: 16px; background: var(--footer-overlay); font-family: var(--font-body); font-weight: 300; font-size: 16px; line-height: 1.5; }
 .ds-footer a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .ds-footer a:focus-visible { outline: 2px solid var(--color-white); outline-offset: 2px; }
+.ds-footer-origin { white-space: nowrap; }
+/* Flag: as tall as the caps around it (0.7em in Bebas Neue and Quicksand), on the baseline; 1px down because both fonts' caps sit a hair below it. */
+.ds-flag { display: inline-block; flex: none; width: 1em; height: 0.7em; vertical-align: baseline; position: relative; top: 1px; }
 
 /* BackToTop */
 .ds-back-to-top {
@@ -171,7 +175,7 @@ a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 
   :root { --header-height: 64px; }
   .ds-header-hint { display: none; }
   .ds-header { gap: var(--space-10); }
-  .ds-header-name { font-size: 26px; white-space: nowrap; }
+  .ds-header-brand { font-size: 26px; }
   .ds-header-actions { gap: var(--space-10); }
   .ds-lang-option { min-width: 40px; padding: 7px 8px 5px; }
   .ds-hero-role { font-size: 25px; }
