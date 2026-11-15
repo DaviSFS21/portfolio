@@ -51,11 +51,11 @@ const hrefs = {
     </script>
   </head>
   <body>
-    <Header lang={lang} homeHref={home} hint={languageHint} languageSwitch={{ hrefs }} />
+    <Header lang={lang} homeHref={home} hint={languageHint} languageSwitch={{ hrefs }} origin />
     <main>
       <slot />
     </main>
-    <Footer lang={lang} />
+    <Footer lang={lang} origin />
     <BackToTop client:idle lang={lang} />
     <script>
       import { initReveal } from '../design-system/components/reveal';
