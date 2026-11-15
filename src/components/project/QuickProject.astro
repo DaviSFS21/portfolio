@@ -1,0 +1,58 @@
+---
+// Quick project: intro with the live website button, one wide image, the fact sheet, a few paragraphs and the next project.
+import type { CollectionEntry } from 'astro:content';
+import { getImage } from 'astro:assets';
+import { Figure, Prose } from '../../design-system/components/Article';
+import { NextProject } from '../../design-system/components/NextProject';
+import { QuickIntro } from './QuickIntro';
+import { ProjectFacts } from './ProjectFacts';
+import { LOCALES, type Locale } from '../../i18n/locales';
+import { nextProjectCard } from './next';
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+  locale: Locale;
+}
+
+const { entry, locale } = Astro.props;
+const { lang, home } = LOCALES[locale];
+const data = entry.data;
+const cover = data.cover ? (await getImage({ src: data.cover.src, width: 2200, format: 'webp' })).src : undefined;
+const nextCard = await nextProjectCard(entry.id, locale);
+---
+
+<QuickIntro
+  lang={lang}
+  title={data.title}
+  kicker={data.kicker?.[lang]}
+  lead={data.lead?.[lang]}
+  backHref={`${home}#projetos`}
+  site={data.site ? { href: data.site.href, label: data.site.label[lang] } : undefined}
+/>
+{
+  cover && data.cover && (
+    <div class="ds-container">
+      <Figure size="wide" src={cover} alt={data.cover.alt[lang]} caption={data.cover.caption?.[lang]} />
+    </div>
+  )
+}
+<ProjectFacts lang={lang} facts={data.facts.map((f) => ({ label: f.label[lang], value: f.value?.[lang], tech: f.tech, href: f.href }))} />
+{
+  data.body && (
+    <div class="ds-container quick-text">
+      <Prose>
+        {data.body[lang].map((p) => (
+          <p>{p}</p>
+        ))}
+      </Prose>
+    </div>
+  )
+}
+<NextProject lang={lang} project={nextCard} />
+
+<style>
+  .quick-text { padding-bottom: var(--space-100); }
+  @media (max-width: 720px) {
+    .quick-text { padding-bottom: var(--space-60); }
+  }
+</style>

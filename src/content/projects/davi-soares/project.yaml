@@ -1,0 +1,99 @@
+# Davi Soares - Branding: case study. Text in both languages side by side, images shared.
+# Source: Brand Guideline v1.0 (02/2024) and the design system case study example.
+title: Davi Soares - Branding
+order: 2
+template: case-study
+summary:
+  pt: Projeto em constante melhoria e desenvolvimento, com o intuito de promoção pessoal e o de causar uma boa primeira impressão com uma identidade visual marcante.
+  en: Project in constant improvement and development, with the intention of personal promotion and of causing a good first impression with a striking visual identity.
+hero:
+  logo: monogram
+  subtitle:
+    pt: brand guideline
+    en: brand guideline
+facts:
+  - label: { pt: "Papel", en: "Role" }
+    value: { pt: "Identidade visual, guia de marca e site", en: "Brand identity, brand guideline and website" }
+  - label: { pt: "Período", en: "Period" }
+    value: { pt: "2022 – 2026", en: "2022 – 2026" }
+  - label: { pt: "Entregas", en: "Deliverables" }
+    value: { pt: "Monograma, assinatura, guia de marca, site e design system", en: "Monogram, signature, brand guideline, website and design system" }
+  - label: { pt: "Ferramentas", en: "Tools" }
+    value: { pt: "Illustrator e Photoshop na marca; no design system:", en: "Illustrator and Photoshop for the brand; for the design system:" }
+    tech: [react, typescript]
+chapters:
+  - title: { pt: "Conceito", en: "Concept" }
+    blocks:
+      - type: prose
+        text:
+          pt:
+            - O conceito da identidade visual decorre do movimento da sofisticação em direção à simplicidade de forma clara e direta, utilizando as letras do primeiro nome do profissional, estilizando-as e sobrepondo-as.
+          en:
+            - The concept of the visual identity comes from a movement from sophistication towards simplicity, in a clear and direct way, using the letters of the professional's first name, stylized and overlapped.
+      - type: quote
+        text:
+          pt: O objetivo da logo é ser um logotipo contemporâneo e agradável.
+          en: The goal of the logo is to be a contemporary and pleasant logotype.
+        cite: Brand Guideline v1.0
+      - type: stats
+        items:
+          - { value: "4", label: { pt: "cores oficiais", en: "official colors" } }
+          - { value: "2", label: { pt: "fontes", en: "typefaces" } }
+          - { value: "6", label: { pt: "peças no monograma", en: "pieces in the monogram" } }
+          - { value: "45°", label: { pt: "o eixo de todas as diagonais", en: "the axis of every diagonal" } }
+      - type: figure
+        src: ./guideline-cover.png
+        size: text
+        alt:
+          pt: "Capa do guia de marca: monograma colorido sobre preto, com o nome Davi Soares"
+          en: "Brand guideline cover: color monogram on black, with the name Davi Soares"
+        caption:
+          pt: Capa do guia de marca, versão 1.0 (fevereiro de 2024).
+          en: Brand guideline cover, version 1.0 (February 2024).
+  - title: { pt: "Logotipos", en: "Logos" }
+    blocks:
+      - type: prose
+        text:
+          pt:
+            - "No geral, a logo 1:1 é a utilizada: em fotos de perfil, no rodapé de sites e em representações profissionais."
+            - A variação horizontal pode ser usada em texturas ou como recurso artístico. No novo topo do site, ela substitui o nome.
+          en:
+            - "As a rule, the 1:1 logo is the one in use: in profile pictures, in website footers and in professional settings."
+            - The horizontal variation can be used in textures or as an artistic resource. At the top of the new website, it takes the place of the name.
+      - type: gallery
+        frame: dark
+        items:
+          - src: ./monogram-color.svg
+            alt: { pt: "Monograma colorido", en: "Color monogram" }
+            caption: { pt: "Monograma 1:1, a logo padrão.", en: "1:1 monogram, the default logo." }
+          - src: ./signature-white.svg
+            alt: { pt: "Assinatura DAVI", en: "DAVI signature" }
+            caption: { pt: "Assinatura horizontal, para texturas e o topo do site.", en: "Horizontal signature, for textures and the top of the website." }
+  - title: { pt: "Uso e aplicação", en: "Usage and application" }
+    blocks:
+      - type: prose
+        text:
+          pt:
+            - Em fundos coloridos, logos brancas ou pretas. Em fundos pretos, brancas ou coloridas. Em fundos brancos, pretas ou coloridas.
+          en:
+            - On colored backgrounds, white or black logos. On black backgrounds, white or color ones. On white backgrounds, black or color ones.
+      - type: gallery
+        items:
+          - src: ./logo-usage.png
+            alt: { pt: "Página do guia com as logos sobre fundo roxo, preto e branco", en: "Guideline page with the logos on purple, black and white backgrounds" }
+            caption: { pt: "Uso das logotipos (guia de marca, página 03).", en: "Logo usage (brand guideline, page 03)." }
+          - src: ./application.png
+            alt: { pt: "Currículo e site com a identidade aplicada", en: "Resume and website with the identity applied" }
+            caption: { pt: "Aplicação no currículo e no site (2024).", en: "Applied to the resume and the website (2024)." }
+  - title: { pt: "Movimento", en: "Motion" }
+    blocks:
+      - type: prose
+        text:
+          pt:
+            - "Em 2026 a marca ganhou movimento. A logo se constrói como um projeto: primeiro as linhas-guia, depois os contornos e, por fim, a cor entrando a 45°."
+            - "A desconstrução faz o mesmo caminho, no mesmo sentido: a cor escorre, o traço se recolhe e as guias se afastam."
+          en:
+            - "In 2026 the brand started to move. The logo builds itself like a project: first the guide lines, then the outlines and, at last, the color coming in at 45°."
+            - "Taking it apart follows the same path, in the same direction: the color drains, the stroke pulls back and the guides move away."
+      - type: logo-animation
+        caption: { pt: "Passe o mouse ou toque para ver de novo.", en: "Hover or tap to watch it again." }

@@ -1,0 +1,298 @@
+/* Davi Soares — component styles. Every value comes from tokens.css; the 720px media query is breakpoint-mobile. */
+
+body { margin: 0; overflow-x: clip; background: var(--surface); color: var(--ink); font-family: var(--font-body); font-weight: 300; }
+.ds-sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.ds-container { box-sizing: border-box; width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 12px; }
+.ds-icon { display: inline-block; vertical-align: -0.125em; }
+
+/* Preview helpers */
+.ds-stage { position: relative; overflow: hidden; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); }
+.ds-stage-gradient { background: var(--gradient-hero); border-color: transparent; }
+.ds-caption { font-family: var(--font-body); font-size: 13px; line-height: 1.4; font-weight: 500; letter-spacing: 0.02em; color: var(--ink-muted); margin: var(--space-10) 0 0; }
+
+/* AnimatedLogo */
+.ds-animated-logo { display: block; width: 100%; }
+
+/* Button */
+.ds-button {
+  display: inline-block; font-family: var(--font-body); font-size: 18px; font-weight: 600; line-height: 1.5;
+  background: var(--button); color: var(--on-button); border: none; padding: 8px 25px; border-radius: var(--radius-button);
+  text-decoration: none; cursor: pointer; transition: background-color var(--duration-button-hover) var(--ease-hover), color var(--duration-button-hover) var(--ease-hover);
+}
+.ds-button:hover { background: var(--accent); color: var(--on-accent); }
+.ds-button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* Highlight (marca-texto) */
+.ds-highlight {
+  font-family: var(--font-display); font-weight: 600; background: var(--highlight); color: var(--on-highlight);
+  padding: 0 12px 0 10px; border-radius: var(--radius-highlight); text-decoration: none;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+a.ds-highlight:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* LanguageSwitch */
+.ds-lang { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; padding: 4px; background: var(--button); border-radius: var(--radius-highlight); }
+.ds-lang-knob {
+  position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); background: var(--color-white);
+  border-radius: var(--radius-button); transition: transform var(--duration-card-hover) var(--ease-hover);
+}
+.ds-lang[data-active="en"] .ds-lang-knob { transform: translateX(100%); }
+.ds-lang-option {
+  position: relative; z-index: 1; min-width: 44px; padding: 7px 12px 5px; border: 0; background: none; cursor: pointer;
+  font-family: var(--font-display); font-size: 20px; line-height: 1; letter-spacing: 0.04em; text-align: center; text-decoration: none;
+  color: var(--on-button); border-radius: var(--radius-button); transition: color var(--duration-card-hover) var(--ease-hover);
+}
+.ds-lang-option[aria-pressed="true"], .ds-lang-option[aria-current="true"] { color: var(--color-primary); }
+.ds-lang-option:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* Header */
+.ds-header { box-sizing: border-box; height: var(--header-height); padding: 0 var(--header-padding-x); display: flex; align-items: center; justify-content: space-between; gap: var(--space-20); background: var(--surface); color: var(--ink); }
+.ds-header-name { font-family: var(--font-display); font-size: 32px; line-height: 1.2; color: var(--ink); text-decoration: none; padding-top: 4px; }
+.ds-header-name:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+.ds-header-actions { display: flex; align-items: center; gap: var(--space-20); }
+.ds-header-hint { font-family: var(--font-body); font-size: 16px; color: var(--ink); animation: ds-disappear 1s forwards 4.5s; }
+@keyframes ds-disappear { to { opacity: 0; visibility: hidden; } }
+
+/* Hero */
+/* Header + hero fill the first screen exactly: the hero takes the viewport minus the header. svh keeps it right under mobile browser bars. */
+.ds-hero { min-height: calc(100vh - var(--header-height)); min-height: calc(100svh - var(--header-height)); position: relative; overflow: hidden; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-30); padding: var(--space-60) 16px 110px; background: var(--gradient-hero); color: var(--color-white); }
+.ds-hero-logo { width: min(clamp(240px, 40vw, 560px), calc((100svh - var(--header-height) - 300px) * 2.1)); min-width: 200px; cursor: pointer; }
+.ds-hero-role { margin: 0; font-family: var(--font-body); font-size: 32px; font-weight: 300; line-height: 1.2; color: var(--color-white); text-align: center; opacity: 0; animation: ds-fade-in var(--duration-subtitle) ease-in 2.5s forwards; }
+@keyframes ds-fade-in { to { opacity: 1; } }
+.ds-scroll { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--color-white); text-decoration: none; }
+.ds-scroll-mouse { position: relative; box-sizing: border-box; width: 30px; height: 60px; border: 2px solid var(--color-white); border-radius: 80px; }
+.ds-scroll-mouse::before { content: ""; position: absolute; top: 20%; left: 50%; width: 7px; height: 7px; transform: translate(-50%, -100%); background: var(--color-white); border-radius: 10px; animation: ds-scroll-down 1.5s ease-in-out infinite; }
+@keyframes ds-scroll-down { 0% { top: 80%; opacity: 0; } 30% { opacity: 1; } 60% { opacity: 1; } 100% { top: 30%; opacity: 0; } }
+.ds-scroll-label { font-family: var(--font-body); font-size: 16px; }
+.ds-scroll:focus-visible { outline: 2px solid var(--color-white); outline-offset: 4px; }
+
+/* ProjectsSection */
+.ds-projects { background: var(--gradient-projects); padding: 5% 0; }
+.ds-section-title { margin: 0 0 var(--space-30); font-family: var(--font-display); font-weight: 400; font-size: 70px; line-height: 1.2; letter-spacing: 2px; text-align: center; color: var(--color-white); }
+.ds-projects-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 4%; row-gap: var(--space-48); }
+
+/* ProjectCard */
+.ds-card {
+  box-sizing: border-box; display: block; padding: var(--space-32); border-radius: var(--radius-card);
+  background: var(--color-black); color: var(--color-white); text-decoration: none; font-family: var(--font-body); font-weight: 300; font-size: 16px; line-height: 1.5;
+  transition: background-color var(--duration-card-hover) var(--ease-hover), color var(--duration-card-hover) var(--ease-hover), box-shadow var(--duration-card-hover) var(--ease-hover), transform var(--duration-card-hover) var(--ease-hover);
+}
+.ds-card:hover { background: var(--accent); color: var(--on-accent); box-shadow: var(--shadow-card); transform: translateY(-5px); }
+.ds-card:focus-visible { outline: 2px solid var(--color-white); outline-offset: 4px; }
+.ds-card-title { margin: 0 0 var(--space-10); font-family: var(--font-body); font-weight: 300; font-size: 32px; line-height: 1.5; }
+.ds-card-text { margin: 0 0 8px; }
+.ds-card-media img { display: block; height: auto; }
+.ds-card--wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; column-gap: var(--space-20); }
+.ds-card--wide .ds-card-media img { width: 80%; margin-left: 8%; }
+.ds-card--wide .ds-card-body { text-align: center; }
+.ds-card--half { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: var(--space-20); }
+/* Every logo fills a box of the same height: logos side by side match in size and the titles line up.
+   The card's height follows its content; the grid stretches the cards of one row to the same height.
+   A wide card showing a logo (image.logo) uses the same box, so the mark keeps its size in the "next project" banner. */
+.ds-card--half .ds-card-media, .ds-card-media--logo { width: 100%; height: clamp(96px, 11vw, 140px); display: flex; justify-content: center; align-items: center; }
+.ds-card--half .ds-card-media img, .ds-card .ds-card-media.ds-card-media--logo img { height: 100%; width: auto; max-width: 100%; object-fit: contain; margin: 0; }
+/* In the wide card the mark gets more air: a bit smaller than in the half card, with room above and below. */
+.ds-card--wide .ds-card-media--logo { height: clamp(72px, 7vw, 100px); padding: var(--space-50) 0; }
+
+/* Contacts */
+.ds-contacts { background: var(--surface); color: var(--ink); padding-top: var(--space-50); }
+.ds-contacts-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.ds-contacts-block { padding: 10px 0 10px 5%; margin-bottom: var(--space-30); }
+.ds-callout { margin: 0 0 var(--space-20); font-family: var(--font-display); font-weight: 400; font-size: 32px; line-height: 1.2; color: var(--ink); }
+.ds-contacts-links { list-style: none; margin: 0; padding: 0; font-size: 16px; line-height: 2; }
+.ds-contacts-links a { color: var(--link); text-decoration: none; }
+.ds-contacts-links a:hover { text-decoration: underline; }
+.ds-contacts-links a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ds-contacts-logo { position: relative; width: 150px; }
+.ds-contacts-logo .ds-logo { display: block; width: 100%; height: auto; transition: opacity var(--duration-button-hover); }
+.ds-contacts-logo .ds-contacts-logo-hover { position: absolute; top: 0; left: 0; opacity: 0; }
+.ds-contacts-logo:hover .ds-contacts-logo-hover { opacity: 1; }
+.ds-contacts-logo:hover .ds-contacts-logo-base { opacity: 0; }
+
+/* Logo */
+.ds-logo { display: block; width: 100%; height: auto; }
+
+/* Footer */
+.ds-footer { background: var(--gradient-footer); color: var(--color-white); text-align: center; }
+.ds-footer-inner { padding: 16px; background: var(--footer-overlay); font-family: var(--font-body); font-weight: 300; font-size: 16px; line-height: 1.5; }
+.ds-footer a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.ds-footer a:focus-visible { outline: 2px solid var(--color-white); outline-offset: 2px; }
+
+/* BackToTop */
+.ds-back-to-top {
+  box-sizing: border-box; width: 50px; height: 50px; display: inline-grid; place-items: center; padding: 0; border: 0; cursor: pointer;
+  background: var(--color-black); color: var(--color-white); border-radius: var(--radius-highlight); font-size: 32px;
+  transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+}
+.ds-back-to-top.is-fixed { position: fixed; right: 30px; bottom: 30px; z-index: 1000; opacity: 0; visibility: hidden; }
+.ds-back-to-top.is-fixed.is-visible { opacity: 1; visibility: visible; }
+.ds-back-to-top:hover { background: var(--accent); }
+.ds-back-to-top:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ThemeSwitch: same height (40px), gray and radius as the language switch */
+.ds-theme-toggle {
+  box-sizing: border-box; width: 40px; height: 40px; display: inline-grid; place-items: center; padding: 0; border: 0;
+  cursor: pointer; font-size: 20px; background: var(--button); color: var(--on-button); border-radius: var(--radius-highlight);
+  transition: background-color var(--duration-card-hover) var(--ease-hover);
+}
+.ds-theme-toggle > * { grid-area: 1 / 1; }
+.ds-theme-toggle:hover { background: var(--accent); }
+.ds-theme-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+/* The icon shows where the button takes you: sun on dark, moon on light. */
+:root[data-theme="light"] .ds-theme-toggle-sun,
+:root:not([data-theme="light"]) .ds-theme-toggle-moon { display: none; }
+
+/* Theme sweep (theme.ts): the new theme covers the page at 45 degrees, bottom-left to top-right,
+   like the color filling the logo. The old page stays still underneath. */
+.ds-theme-sweeping::view-transition-old(root),
+.ds-theme-sweeping::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+.ds-theme-sweeping::view-transition-new(root) { animation: ds-theme-sweep var(--duration-fill) var(--ease-draw) both; }
+@keyframes ds-theme-sweep {
+  from { clip-path: polygon(0 100%, 0 100%, 0 100%); }
+  to { clip-path: polygon(0 100%, calc(100vw + 100vh) 100%, 0 calc(100% - 100vw - 100vh)); }
+}
+
+/* Scroll reveal (reveal.ts): hidden only while html has ds-reveal-ready, so without JavaScript everything shows. */
+.ds-reveal-ready [data-reveal] {
+  opacity: 0;
+  transition: opacity var(--duration-reveal) var(--ease-reveal) var(--reveal-delay, 150ms),
+    transform var(--duration-reveal) var(--ease-reveal) var(--reveal-delay, 150ms);
+}
+.ds-reveal-ready [data-reveal="up"] { transform: translateY(100px); }
+.ds-reveal-ready [data-reveal="right"] { transform: translateX(-100px); }
+.ds-reveal-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
+/* If initReveal never runs, show the blocks after 4s anyway. */
+.ds-reveal-ready:not(.ds-reveal-on) [data-reveal] { animation: ds-reveal-fallback 0s 4s forwards; }
+@keyframes ds-reveal-fallback { to { opacity: 1; transform: none; } }
+/* Neighbors: the second half card arrives 450ms after the first. */
+.ds-card--half + .ds-card--half { --reveal-delay: 450ms; }
+
+@media (max-width: 720px) {
+  :root { --header-height: 64px; }
+  .ds-header-hint { display: none; }
+  .ds-header { gap: var(--space-10); }
+  .ds-header-name { font-size: 26px; white-space: nowrap; }
+  .ds-header-actions { gap: var(--space-10); }
+  .ds-lang-option { min-width: 40px; padding: 7px 8px 5px; }
+  .ds-hero-role { font-size: 25px; }
+  .ds-section-title { font-size: 50px; }
+  .ds-projects-grid, .ds-contacts-grid { grid-template-columns: 1fr; }
+  .ds-card--wide { grid-template-columns: 1fr; text-align: center; }
+  .ds-card--wide .ds-card-media img { margin: 0 auto 20px; }
+  .ds-card--wide .ds-card-media--logo { padding: var(--space-20) 0; margin-bottom: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-hero-role { animation: none; opacity: 1; }
+  .ds-scroll-mouse::before { animation: none; top: 50%; opacity: 1; }
+  .ds-header-hint { animation: none; }
+  .ds-card, .ds-button, .ds-lang-knob, .ds-lang-option, .ds-theme-toggle { transition: none; }
+  .ds-card:hover { transform: none; }
+}
+
+/* ===== Project pages ===== */
+.ds-label { font-family: var(--font-display); font-weight: 400; font-size: 20px; line-height: 1; letter-spacing: 0.04em; color: var(--ink-muted); margin: 0; }
+.ds-lead { font-family: var(--font-body); font-weight: 300; font-size: 22px; line-height: 1.5; color: var(--ink); max-width: var(--prose-width); margin: 0; }
+.ds-caption-text { font-family: var(--font-body); font-weight: 400; font-size: 15px; line-height: 1.5; color: var(--ink-muted); margin: var(--space-10) 0 0; }
+.ds-block-title { margin: 0 0 var(--space-30); font-family: var(--font-display); font-weight: 400; font-size: 50px; line-height: 1.2; letter-spacing: 2px; color: var(--ink); }
+.ds-tech { display: inline-flex; align-items: center; gap: 8px; }
+.ds-tech svg { display: block; }
+
+/* ProjectHero */
+/* The mark is sized by height, so a square mark and a wide one look the same size from project to project. */
+.ds-project-hero-media { display: flex; justify-content: center; height: min(240px, 40vw, calc(100svh - var(--header-height) - 320px)); min-height: 120px; }
+.ds-project-hero-media > * { display: block; height: 100%; width: auto; max-width: 90vw; object-fit: contain; }
+.ds-project-hero-media--width { height: auto; min-height: 0; }
+.ds-project-hero-media--width > * { width: 100%; height: auto; max-width: none; }
+.ds-project-hero-title { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 70px; line-height: 1.2; letter-spacing: 2px; color: var(--color-white); text-align: center; }
+.ds-project-hero-subtitle { margin: 0; font-family: var(--font-body); font-weight: 300; font-size: calc(32px * var(--ds-subtitle-scale, 1)); line-height: 1.2; color: var(--color-white); text-align: center; opacity: 0; animation: ds-fade-in var(--duration-subtitle) ease-in 0.5s forwards; }
+
+/* ProjectIntro */
+.ds-project-intro { background: var(--surface); color: var(--ink); padding: var(--space-60) 0 var(--space-30); }
+.ds-back-link { font-family: var(--font-body); font-size: 16px; color: var(--link); text-decoration: none; }
+.ds-back-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.ds-back-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ds-project-intro-kicker { margin-top: var(--space-30); }
+.ds-project-intro-title { margin: var(--space-10) 0 var(--space-20); font-family: var(--font-display); font-weight: 400; font-size: 70px; line-height: 1.2; letter-spacing: 2px; color: var(--ink); }
+.ds-project-intro-actions { display: flex; flex-wrap: wrap; gap: var(--space-20); margin-top: var(--space-30); }
+
+/* FactSheet */
+.ds-facts { background: var(--surface); color: var(--ink); padding: var(--space-30) 0; }
+.ds-facts-title { margin-bottom: var(--space-10); }
+.ds-facts-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); column-gap: var(--space-30); margin: 0; padding-top: var(--space-10); border-top: var(--rule-thick) solid var(--ink); }
+.ds-fact { padding: var(--space-10) 0 var(--space-20); border-bottom: 1px solid var(--line); }
+.ds-fact dt { margin-bottom: 8px; }
+.ds-fact dd { margin: 0; font-family: var(--font-body); font-weight: 300; font-size: 16px; line-height: 1.5; color: var(--ink); }
+.ds-fact dd a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+.ds-fact-tech { display: flex; flex-wrap: wrap; gap: 10px 16px; }
+.ds-fact-tech .ds-tech svg { font-size: 24px; }
+
+/* ArticleSection */
+.ds-article-section { background: var(--surface); color: var(--ink); padding: var(--space-60) 0 var(--space-30); }
+.ds-article-section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--space-20); padding-bottom: var(--space-10); margin-bottom: var(--space-30); border-bottom: var(--rule-thick) solid var(--ink); }
+.ds-article-section-title { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 50px; line-height: 1.2; letter-spacing: 2px; }
+.ds-article-section-number { font-family: var(--font-display); font-size: 32px; line-height: 1.2; }
+.ds-article-section-body { display: flex; flex-direction: column; gap: var(--space-30); }
+
+/* Prose */
+.ds-prose { width: 100%; max-width: var(--prose-width); margin-inline: auto; font-family: var(--font-body); font-weight: 400; font-size: 18px; line-height: 1.7; color: var(--ink); }
+.ds-prose p, .ds-prose ul, .ds-prose ol { margin: 0 0 1em; }
+.ds-prose > :last-child { margin-bottom: 0; }
+.ds-prose h3 { margin: 1.4em 0 0.4em; font-family: var(--font-display); font-weight: 400; font-size: 32px; line-height: 1.2; }
+.ds-prose ul, .ds-prose ol { padding-left: 1.2em; }
+.ds-prose a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+.ds-prose a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ds-prose strong { font-weight: 600; }
+
+/* Figure & Gallery */
+.ds-figure { margin: 0; }
+.ds-figure img { display: block; width: 100%; height: auto; }
+.ds-figure--text { width: 100%; max-width: var(--prose-width); margin-inline: auto; }
+.ds-figure--full { width: 100vw; margin-left: calc(50% - 50vw); }
+.ds-figure--full .ds-caption-text { box-sizing: border-box; max-width: var(--container-width); margin: var(--space-10) auto 0; padding: 0 12px; }
+.ds-figure--framed .ds-figure-media { display: flex; justify-content: center; align-items: center; padding: var(--space-30); background: var(--color-black); border: 1px solid var(--line); }
+.ds-figure--framed img { width: auto; max-width: 100%; max-height: 200px; }
+.ds-gallery { display: grid; gap: var(--space-20); }
+.ds-gallery--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ds-gallery--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ds-gallery .ds-figure { max-width: none; }
+.ds-gallery .ds-figure--framed .ds-figure-media { box-sizing: border-box; min-height: 260px; }
+
+/* PullQuote */
+.ds-quote { width: 100%; margin: 0 auto; max-width: var(--prose-width); box-sizing: border-box; padding-top: var(--space-20); border-top: var(--rule-thick) solid var(--ink); }
+.ds-quote blockquote { margin: 0; font-family: var(--font-body); font-weight: 300; font-size: 28px; line-height: 1.4; color: var(--ink); }
+.ds-quote figcaption { margin-top: var(--space-10); }
+
+/* Stats */
+.ds-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-30); margin: 0; }
+.ds-stat { display: flex; flex-direction: column-reverse; justify-content: flex-end; }
+.ds-stat-value { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 70px; line-height: 1; color: var(--ink); }
+.ds-stat-label { margin: 4px 0 0; font-family: var(--font-body); font-weight: 300; font-size: 16px; line-height: 1.5; color: var(--ink-muted); }
+
+/* NextProject */
+.ds-next-project { background: var(--gradient-projects); padding: var(--space-60) 0; }
+.ds-next-project-title { color: var(--color-white); margin-bottom: var(--space-30); }
+.ds-next-project-card { display: grid; }
+
+/* AboutSection */
+.ds-about { background: var(--surface); color: var(--ink); padding: var(--space-100) 0; }
+.ds-about-inner { width: var(--content-width); max-width: 90%; margin: 0 auto; display: flex; align-items: center; justify-content: space-around; gap: var(--space-20); }
+.ds-about-photo { display: block; width: 420px; max-width: 100%; height: auto; }
+.ds-about-text { width: var(--text-width); max-width: 100%; }
+.ds-about-paragraph { margin: 0 0 1rem; font-family: var(--font-body); font-weight: 300; font-size: 18px; line-height: 22px; }
+.ds-about-tech { display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 45px; color: var(--ink); }
+.ds-about-cta { margin-top: var(--space-30); }
+
+@media (max-width: 720px) {
+  .ds-project-hero-title, .ds-project-intro-title { font-size: 50px; }
+  .ds-project-hero-subtitle { font-size: calc(25px * var(--ds-subtitle-scale, 1)); }
+  .ds-article-section-title, .ds-block-title { font-size: 35px; }
+  .ds-stat-value { font-size: 50px; }
+  .ds-gallery--2, .ds-gallery--3 { grid-template-columns: 1fr; }
+  .ds-about { padding: var(--space-60) 0; }
+  .ds-about-inner { display: block; }
+  .ds-about-photo { width: 300px; margin: 0 auto var(--space-30); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ds-project-hero-subtitle { animation: none; opacity: 1; }
+}

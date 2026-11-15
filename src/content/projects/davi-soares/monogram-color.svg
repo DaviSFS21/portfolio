@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="120 120 760 760" width="760" height="760" role="img" aria-label="Davi Soares — monograma colorido para fundo escuro">
+<title>Davi Soares — monograma colorido para fundo escuro</title>
+<defs>
+<linearGradient id="dme-a" gradientUnits="userSpaceOnUse" x1="905.9" y1="413.9" x2="291.8" y2="1028.1"><stop offset="0" stop-color="#3600FF"/><stop offset=".55" stop-color="#3600FF"/><stop offset=".93" stop-color="#7C00FF"/></linearGradient>
+<linearGradient id="dme-b" gradientUnits="userSpaceOnUse" x1="570.2" y1="339.8" x2="823.5" y2="86.5"><stop offset="0" stop-color="#3600FF"/><stop offset=".23" stop-color="#3600FF"/><stop offset=".88" stop-color="#7C00FF"/></linearGradient>
+<linearGradient id="dme-c" gradientUnits="userSpaceOnUse" x1="86.4" y1="823.7" x2="518.1" y2="392"><stop offset="0" stop-color="#3600FF"/><stop offset=".47" stop-color="#3600FF"/><stop offset=".88" stop-color="#FFFFFF"/></linearGradient>
+</defs>
+<path fill="#3600FF" d="M235.785 752.070L125.785 862.066V125.449H235.785Z"/>
+<path fill="#FFFFFF" d="M764.891 247.930L874.891 137.934V874.551H764.891Z"/>
+<path fill="url(#dme-a)" d="M138.270 874.551H293.828L642.410 525.973V874.551H752.406V260.414Z"/>
+<path fill="url(#dme-b)" d="M706.844 125.449L576.461 255.836L627.234 306.313C638.164 317.180 643.012 331.844 641.773 346.078L862.402 125.449Z"/>
+<path fill="#FFFFFF" d="M610.191 306.828L442.355 139.973C432.996 130.672 420.340 125.449 407.145 125.449H248.270V235.445H362.441C375.688 235.445 388.391 240.707 397.754 250.074L454.676 306.992C474.176 326.496 474.176 358.117 454.676 377.621L235.785 596.512V752.070L610.297 377.555C629.840 358.012 629.793 326.313 610.191 306.828Z"/>
+<path fill="url(#dme-c)" d="M124.891 707.406L125.785 862.066L518.078 469.773L440.301 391.992Z"/>
+</svg>

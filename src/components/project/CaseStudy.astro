@@ -1,0 +1,89 @@
+---
+// Case study: hero, fact sheet, numbered chapters and the next project, all from the design system.
+import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import { ArticleSection, Prose, Figure, Gallery, PullQuote, Stats } from '../../design-system/components/Article';
+import { NextProject } from '../../design-system/components/NextProject';
+import { CaseHero } from './CaseHero';
+import { ProjectFacts } from './ProjectFacts';
+import { nextProjectCard } from './next';
+import { LogoReplay } from './LogoReplay';
+import { LOCALES, type Locale } from '../../i18n/locales';
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+  locale: Locale;
+}
+
+const { entry, locale } = Astro.props;
+const { lang } = LOCALES[locale];
+const data = entry.data;
+
+// Bitmaps go out as WebP at about twice their shown width; SVGs stay as they are.
+const src = async (img: ImageMetadata, width: number) =>
+  img.format === 'svg' ? img.src : (await getImage({ src: img, width, format: 'webp' })).src;
+
+const chapters = await Promise.all(
+  (data.chapters ?? []).map(async (chapter, i) => ({
+    number: String(i + 1).padStart(2, '0'),
+    title: chapter.title[lang],
+    blocks: await Promise.all(
+      chapter.blocks.map(async (block) => {
+        if (block.type === 'figure') {
+          const width = block.size === 'text' ? 1440 : 2200;
+          return { ...block, url: await src(block.src, width) };
+        }
+        if (block.type === 'gallery') {
+          return { ...block, urls: await Promise.all(block.items.map((item) => src(item.src, 1100))) };
+        }
+        return block;
+      }),
+    ),
+  })),
+);
+
+const heroImage = data.hero?.image ? await src(data.hero.image, 840) : undefined;
+
+const nextCard = await nextProjectCard(entry.id, locale);
+---
+
+<CaseHero lang={lang} title={data.title} subtitle={data.hero?.subtitle?.[lang]} logo={data.hero?.logo} imageSrc={heroImage} background={data.hero?.background} subtitleFont={data.hero?.subtitleFont} subtitleScale={data.hero?.subtitleScale} />
+<div id="conteudo">
+  <ProjectFacts lang={lang} facts={data.facts.map((f) => ({ label: f.label[lang], value: f.value?.[lang], tech: f.tech, href: f.href }))} />
+  {
+    chapters.map((chapter) => (
+      <ArticleSection number={chapter.number} title={chapter.title}>
+        {chapter.blocks.map((block) => {
+          switch (block.type) {
+            case 'prose':
+              return (
+                <Prose>
+                  {block.text[lang].map((p) => (
+                    <p>{p}</p>
+                  ))}
+                </Prose>
+              );
+            case 'quote':
+              return <PullQuote cite={block.cite}>{block.text[lang]}</PullQuote>;
+            case 'stats':
+              return <Stats items={block.items.map((s) => ({ value: s.value, label: s.label[lang] }))} />;
+            case 'figure':
+              return <Figure src={block.url} alt={block.alt[lang]} caption={block.caption?.[lang]} size={block.size} frame={block.frame} />;
+            case 'gallery':
+              return (
+                <Gallery
+                  columns={block.columns}
+                  frame={block.frame}
+                  items={block.items.map((item, i) => ({ src: block.urls[i], alt: item.alt[lang], caption: item.caption?.[lang] }))}
+                />
+              );
+            case 'logo-animation':
+              return <LogoReplay client:visible caption={block.caption?.[lang]} />;
+          }
+        })}
+      </ArticleSection>
+    ))
+  }
+</div>
+<NextProject lang={lang} project={nextCard} />

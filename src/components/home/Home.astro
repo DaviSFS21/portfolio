@@ -1,0 +1,42 @@
+---
+import { getImage } from 'astro:assets';
+import { Hero } from '../../design-system/components/Hero';
+import { Contacts } from '../../design-system/components/Contacts';
+import { About } from './About';
+import { Projects } from './Projects';
+import { LOCALES, type Locale } from '../../i18n/locales';
+import { projectHref } from '../../i18n/routes';
+import { CONTACTS, PROJECTS } from '../../data/home';
+import photo from '../../assets/about/davi-soares.webp';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { lang } = LOCALES[locale];
+
+// Images go out as WebP at about twice their shown size (sharp screens), never the original files.
+const photoSrc = (await getImage({ src: photo, width: 640, format: 'webp' })).src;
+const cards = await Promise.all(
+  PROJECTS.map(async (p) => ({
+    key: p.slug,
+    variant: p.variant,
+    title: p.title,
+    description: p.description[lang],
+    href: p.external ?? projectHref(locale, p.slug),
+    newTab: Boolean(p.external),
+    image: {
+      // SVGs are already small and sharp at any size; bitmaps get resized.
+      src: p.image.format === 'svg' ? p.image.src : (await getImage({ src: p.image, width: p.variant === 'wide' ? 1040 : 720, format: 'webp' })).src,
+      alt: p.alt[lang],
+      width: p.imageWidth,
+    },
+  })),
+);
+---
+
+<Hero client:load lang={lang} />
+<About lang={lang} photoSrc={photoSrc} />
+<Projects lang={lang} cards={cards} />
+<Contacts lang={lang} resumeHref={CONTACTS.resume[lang]} socials={[...CONTACTS.socials]} email={CONTACTS.email} />

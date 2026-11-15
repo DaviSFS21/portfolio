@@ -1,0 +1,17 @@
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Design system packages arrive here before being unpacked into src/ and public/
+.ds-sync/
+
+# Local files
+.env
+.DS_Store
+npm-debug.log*
+
+# Previews the Claude app saves into this folder
+Claude outputs/

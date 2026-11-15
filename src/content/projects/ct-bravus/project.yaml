@@ -1,0 +1,58 @@
+# CT Bravus: quick project. Text in both languages side by side, images shared.
+title: CT Bravus
+order: 1
+template: quick
+summary:
+  pt: Projeto freelance. Uma landing page desenvolvida para promover uma academia local, com React.
+  en: Freelance project. A landing page to promote a local gym, built with React.
+kicker:
+  pt: Landing page · Freelance
+  en: Landing page · Freelance
+lead:
+  pt: Uma landing page desenvolvida para promover uma academia local.
+  en: A landing page to promote a local gym.
+site:
+  href: https://ctbravus.com
+  label:
+    pt: Ver o site
+    en: Visit the website
+cover:
+  src: ./home.png
+  alt:
+    pt: Página inicial do site da CT Bravus
+    en: Home page of the CT Bravus website
+  caption:
+    pt: Página inicial do site.
+    en: The website's home page.
+facts:
+- label:
+    pt: Tipo
+    en: Type
+  value:
+    pt: Landing page, projeto freelance
+    en: Landing page, freelance project
+- label:
+    pt: Cliente
+    en: Client
+  value:
+    pt: CT Bravus, academia de crosstraining
+    en: CT Bravus, a crosstraining gym
+- label:
+    pt: Stack
+    en: Stack
+  tech:
+  - react
+- label:
+    pt: Site
+    en: Website
+  value:
+    pt: ctbravus.com
+    en: ctbravus.com
+  href: https://ctbravus.com
+body:
+  pt:
+  - '"CT Bravus" é uma academia focada em crosstraining que visa promover uma experiência de treino acessível e eficiente.'
+  - Projeto freelance, desenvolvido com React.
+  en:
+  - '"CT Bravus" is a recent crosstraining gym that aims to provide an accessible but efficient training experience.'
+  - Freelance project, developed with React.
